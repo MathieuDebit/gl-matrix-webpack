@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './entry.js',
@@ -8,6 +9,13 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        screw_ie8: true,
+        warnings: false
+      },
+      output: { comments: false }
+    }),
   ]
 };
