@@ -1,12 +1,24 @@
-const path = require('path');
-const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
-  entry: './entry.js',
+  entry: "./entry.js",
+  module: {
+    rules: [
+      {
+        test: /(\.js)$/,
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ]
+      }
+    ]
+  },
   output: {
     path: path.resolve(__dirname),
-    filename: 'bundle.js'
+    filename: "bundle.js"
   },
   plugins: [
     new UglifyJsPlugin({
@@ -16,6 +28,6 @@ module.exports = {
         warnings: false
       },
       output: { comments: false }
-    }),
+    })
   ]
 };
